@@ -8,10 +8,14 @@
     <%= link_to 'New product', new_product_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div data-controller="dropdown">
-    <%= label_tag 'categories' %>
-    <%= select_tag 'categories', options_for_select(Product::CATEGORIES), {include_blank: true, "data-dropdown-target" => "category", "data-action" => "dropdown#filter"} %>
-  </div>
+<!--  <div data-controller="dropdown">-->
+    <%#= label_tag 'categories' %>
+    <%#= select_tag 'categories', options_for_select(Product::CATEGORIES), {include_blank: true, "data-dropdown-target" => "category", "data-action" => "dropdown#filter"} %>
+<!--  </div>-->
+
+  <%= form_tag products_path, method: :get do %>
+    <%= select_tag 'category', options_for_select(Product::CATEGORIES, selected: params[:category]), {include_blank: true, onchange: "this.form.submit();"} %>
+  <% end %>
 
   <div id="products" class="min-w-full">
     <%= render @products %>

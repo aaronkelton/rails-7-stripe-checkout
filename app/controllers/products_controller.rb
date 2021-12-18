@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = params[:category].present? ? Product.where(category: params[:category]) : Product.all
   end
 
   # @todo can't get @products to update in the view with filtered collection
