@@ -1,10 +1,20 @@
 class ProductsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :filter_products
   before_action :refresh_products, only: :index
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
   def index
     @products = Product.all
+  end
+
+  # @todo can't get @products to update in the view with filtered collection
+  def filter_products
+    @products = params[:category] ? Product.where(category: params[:category]) : Product.all
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to products_url }
+    end
   end
 
   # GET /products/1 or /products/1.json
