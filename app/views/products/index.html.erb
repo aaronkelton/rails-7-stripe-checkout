@@ -5,7 +5,7 @@
 
   <div class="flex justify-between items-center">
     <h1 class="text-lg font-bold text-4xl">Products</h1>
-    <%= link_to 'New product', new_product_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= button_to 'Checkout', create_checkout_session_path, method: :post, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
 <!--  <div data-controller="dropdown">-->

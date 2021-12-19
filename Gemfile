@@ -77,3 +77,5 @@ gem "tailwindcss-rails", "~> 1.0"
 gem "faraday", "~> 1.8"
 
 gem "awesome_print", "~> 1.9"
+
+gem "stripe", "~> 5.42"
