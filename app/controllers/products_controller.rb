@@ -67,14 +67,48 @@ class ProductsController < ApplicationController
     end
   end
 
+  def success; end
+  def cancel; end
+
   private
 
-    def refresh_products
-      Product.destroy_all
-      response = Faraday.get('https://fakestoreapi.com/products')
-      if response.success?
-        Product.create!(JSON.parse(response.body))
-      end
+    def refresh_products # I have the Products/Prices in Stripe. Also have them in postgres db. Commenting out for now.
+      # Product.destroy_all
+      # response = Faraday.get('https://fakestoreapi.com/products')
+      # if response.success?
+      #   products = JSON.parse(response.body).map{ |product_hash| product_hash.transform_keys('id' => 'lookup_key') }
+      #
+      #   # create Stripe Prices and Products; swallow any duplicate Product creation attempts
+      #   products.each do |product|
+      #     stripe_product = Stripe::Product.create({
+      #                                                 id: product['lookup_key'],
+      #                                                 name: product['title'],
+      #                                                 description: product['description'].truncate(500),
+      #                                                 images: Array(product['image']),
+      #                                                 metadata: {
+      #                                                     lookup_key: product['lookup_key'].to_s,
+      #                                                     category: product['category'],
+      #                                                     rate: product.dig('rating', 'rate'),
+      #                                                     count: product.dig('rating', 'count')
+      #                                                 }
+      #                                             })
+      #     Stripe::Price.create({
+      #                              currency: 'usd',
+      #                              product: stripe_product.id,
+      #                              unit_amount: (product['price']*100).to_i, # expects an integer representation, so $1.00 is 100
+      #                              lookup_key: product['lookup_key'].to_s
+      #                          })
+      #   rescue Stripe::InvalidRequestError => e
+      #     if /already uses that lookup key/.match?(e.message)
+      #       next
+      #     elsif /Product already exists./.match?(e.message)
+      #       next
+      #     else
+      #       raise e
+      #     end
+      #   end
+      #   Product.create!(products)
+      # end
     end
 
     # Use callbacks to share common setup or constraints between actions.

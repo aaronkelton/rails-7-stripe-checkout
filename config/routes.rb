@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root "products#index"
   resources :products
+  get '/success', to: 'products#success'
+  get '/cancel', to: 'products#cancel'
+
   resources :orders
   resources :webhooks, only: [:create]
 
