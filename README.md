@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I haven't tested yet if this works for someone cloning the repo and testing locally. I think whoever clones this repo would need to replace the Stripe test secret key in the Rails credentials with their own test key (otherwise we'd have to share). Also, for your Stripe CLI authentication, when you run `strip listen --forward-to localhost:3000/webhooks` you may get a new webhook key, which also needs to be updated in Rails credentials.
 
-Things you may want to cover:
+After cloning the repo, you should be able to `rails db:setup`, then start the rails server `rails s` and navigate to localhost:3000.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Walkthrough: https://www.youtube.com/watch?v=JN7ZYhO9-es
